@@ -1,0 +1,30 @@
+{% extends 'dashboardBase.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block styles %}
+<style>
+    .custom1{
+        border-radius: 1px;
+    }
+</style>
+
+{% endblock %}
+{% block body %}
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        {{ message }}
+    </div>
+{% endfor %}
+<h1>{{ button }} a criminal record.</h1><br>
+<div class="jumbotron">
+    <div class="container">
+    <form method="POST" action="/{{ action }}">
+        {{ form.hidden_tag() }}
+        {{ wtf.form_field(form.name,class="custom1") }}
+        {{ wtf.form_field(form.crimes,class="custom1") }}
+        {{ wtf.form_field(form.status,class="custom1") }}
+        <button class="btn btn-secondary" type="submit"> {{ button }}</button>
+    </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Criminal Records Management System</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}"/>     
+    {% block head %}{% endblock %}
+  </head>
+  <body">
+	    <div class="d-md-flex align-items-stretch">
+            <div id="content" class="p-4 p-md-5 pt-5">
+                {% block body %}{% endblock %}
+            </div>
+        <nav id="sidebar" style="background-color: lightskyblue;">
+            <div class="p-4 pt-5">
+                <h5>Dashboard</h5>
+                <ul class="list-unstyled components mb-5" >
+                <li>
+                    <a href="/dashboard" aria-expanded="false" class="sidebar-nav-item">Home</a>
+                </li>
+                <li>
+                    <a href="/viewRecords" aria-expanded="false" class="sidebar-nav-item">View Records</a>
+                </li>
+                <li>
+                    <a href="/addRecords" aria-expanded="false" class="sidebar-nav-item">Add Records</a>
+                </li>
+                <li>
+                    <a href="/logout" aria-expanded="false" class="sidebar-nav-item">Logout</a>
+                </li>
+                </ul>
+                    {% block recentsearches %}{% endblock %}
+            </div>
+        </nav>
+    </div>
+
+  </body>
+</html> 

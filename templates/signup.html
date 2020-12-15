@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block styles %}
+<style>
+    .custom1{
+        border-radius: 1px;
+    }
+</style>
+
+{% endblock %}
+{% block body %}
+<h1>Please Sign Up.</h1><br>
+<div class="jumbotron">
+    <div class="container">
+    <form method="POST" action="/signup">
+        {{ form.hidden_tag() }}
+        {{ wtf.form_field(form.username,class="custom1") }}
+        {{ wtf.form_field(form.name,class="custom1") }}
+        {{ wtf.form_field(form.password,class="custom1") }}
+        {{ wtf.form_field(form.email,class="custom1") }}<br>
+        <button class="btn btn-secondary" type="submit">Signup</button>
+    </form>
+    </div>
+</div>
+{% endblock %}

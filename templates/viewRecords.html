@@ -1,0 +1,68 @@
+{% extends 'dashboardBase.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block styles %}
+<style>
+    .custom1{
+        border-radius: 1px;
+    }
+</style>
+
+{% endblock %}
+{% block body %}
+
+<div class="container">
+<h1>All Records in the Database.</h1>
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        {{ message }}
+    </div>
+{% endfor %}
+{% if criminals %}
+<table class="table jumbotron">
+    <thead>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Crimes</th>
+        <th scope="col">Status</th>
+        <th scope="col">Actions</th>
+    </thead>
+    {% for criminal in criminals %}
+    <tbody>
+        <th scope="row">
+            {{ criminal.id }}
+        </th>
+        <td>
+            {{ criminal.name }}
+        </td>
+        <td>
+            {{ criminal.crimes }}
+        </td>
+        <td>
+            {% if criminal.status==0 %}
+            Arrested
+            {% endif %}
+            {% if criminal.status==1 %}
+            Wanted
+            {% endif %}
+            {% if criminal.status==2 %}
+            Released
+            {% endif %}
+        </td>
+        <td class="row">
+            <div class="btn-group">
+                <form action="{{ url_for('delete_records', id = criminal.id) }}" method=post class="btn btn-sm">
+                    <input type=submit value="Delete">
+                </form>
+                <form action="{{ url_for('edit_records', id = criminal.id) }}" method=post class="btn btn-sm">
+                    <input type=submit value="Edit">
+                </form>
+            </div>
+        </td>
+    </tbody>
+    {% endfor %}
+</table>
+{% endif %}
+</div>
+
+{% endblock %}

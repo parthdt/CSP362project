@@ -1,0 +1,16 @@
+{% extends 'dashboardBase.html' %}
+
+{% block body %}
+{% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        {{ message }}
+    </div>
+{% endfor %}
+<div class="container">
+    <h1> Welcome, {{ name }}!</h1>
+    <div class="jumbotron"><h5>
+        This is the dashboard for viewing and maintaining records of Criminals.
+        Choose any option from the Menu on the right to proceed.
+    </h5></div>
+</div>
+{% endblock %}

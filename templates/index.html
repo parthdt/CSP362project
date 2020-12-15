@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DBMS Project</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}"/>     
+    <script src="static/js/three.r95.min.js"></script>
+    <script src="static/js/vanta.dots.min.js"></script>
+</head>
+<body>
+    <div id="VantaBG" style="height: 100vh;">
+	    <div class="container d-md-flex align-items-stretch p-4 p-md-5 pt-5">
+            <div class="col-8">
+                <h1 style="color:chartreuse;"> CSP 362 - Database Management Systems Lab </h1>
+                <h4 style="color: aqua;"> Criminal Records Database </h4>
+                <input type="button" class="btn btn-light" value="Click Here to Proceed" onclick="location.href = '/home';">
+                <br>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    VANTA.DOTS({
+      el: "#VantaBG",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      backgroundAlpha: 0.99
+    })
+</script>

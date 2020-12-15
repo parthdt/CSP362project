@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container">
+    {% for message in get_flashed_messages() %}
+    <div class="alert alert-warning">
+        {{ message }}
+    </div>
+    {% endfor %}
+        <div class="jumbotron">
+        <h1>Criminal Records Management System</h1><br>
+        <p><h4>
+        This is the project submission for the CSP 362 - Database Management Systems Lab.<br><br>
+        Team Members:<br>
+        Parth Thakker, 2017UCS0047<br>
+        Yash Katiyar, 2017UCS0060
+        </p></h4>
+    </div>
+    Please login to proceed to the Dashboard.
+</div>
+{% endblock %}
