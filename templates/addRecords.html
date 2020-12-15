@@ -23,6 +23,9 @@
         {{ wtf.form_field(form.name,class="custom1") }}
         {{ wtf.form_field(form.crimes,class="custom1") }}
         {{ wtf.form_field(form.status,class="custom1") }}
+        <div class="alert">
+            Status codes: 0 -> Arrested, 1 -> Wanted, 2 -> Released
+        </div>
         <button class="btn btn-secondary" type="submit"> {{ button }}</button>
     </form>
     </div>
