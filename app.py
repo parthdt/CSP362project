@@ -1,15 +1,24 @@
-from flask import Flask, render_template, redirect, flash, url_for
+from flask import Flask, render_template, redirect, flash, url_for, request
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
+from flask_uploads import UploadSet, IMAGES
 from wtforms import StringField, PasswordField, BooleanField, DecimalField
 from wtforms.validators import InputRequired, Email, Length, NumberRange
+from flask_wtf.file import FileField, FileAllowed, FileRequired
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+import os
+
+UPLOADS_PATH = 'static/uploads/'
+images = UploadSet('images', IMAGES)
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dbms.db'
 app.config['SECRET_KEY'] = 'DBMSPROJECT'
+app.config['UPLOAD_FOLDER'] = UPLOADS_PATH
+
 Bootstrap(app)
 db = SQLAlchemy(app)
 login_manager = LoginManager()
@@ -33,6 +42,7 @@ class Criminal(db.Model):
     name = db.Column(db.String(50))
     crimes = db.Column(db.String(100))
     status = db.Column(db.Integer)
+    image = db.Column(db.String(100))
 
     def __repr__(self):
         return '<Name {}, Crimes {}, Status Code {}>'.format(self.name,self.crimes,self.status)
@@ -56,6 +66,7 @@ class AddCriminalForm(FlaskForm):
     name = StringField('name', validators=[InputRequired(), Length(min=10, max=50)])
     crimes = StringField('crimes', validators=[InputRequired(), Length(min=0, max=100)])
     status = DecimalField('status', validators=[NumberRange(min=0, max=2, message='Status Code should be between 0 to 2')])
+    image = FileField('image', validators=[FileAllowed(['jpg', 'png'], 'Images only!')])
 
 @app.route('/')
 def index():
@@ -110,7 +121,13 @@ def view_records():
 def add_records():
     form = AddCriminalForm()
     if form.validate_on_submit():
-        new_criminal = Criminal(name = form.name.data, crimes = form.crimes.data, status = int(form.status.data))
+        f = request.files['image']
+        if f:
+            filename = secure_filename(f.filename)
+            path = os.path.join(UPLOADS_PATH,filename)
+            f.save(path)
+        else: path = 'static/images/noimage.webp'
+        new_criminal = Criminal(name = form.name.data, crimes = form.crimes.data, status = int(form.status.data), image = path)
         db.session.add(new_criminal)
         db.session.commit()
         flash('Criminal record added.')
@@ -135,6 +152,14 @@ def edit_records(id):
         criminal.name = form.name.data
         criminal.crimes = form.crimes.data
         criminal.status = int(form.status.data)
+        # criminal.image = form.image.data.read()
+        f = request.files['image']
+        if f:
+            filename = secure_filename(f.filename)
+            path = os.path.join(UPLOADS_PATH,filename)
+            f.save(path)
+        else: path = criminal.image
+        criminal.image = path
         db.session.commit()
         flash('Criminal record edited.')
         return redirect(url_for('view_records'))

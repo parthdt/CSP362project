@@ -25,6 +25,7 @@
         <th scope="col">Name</th>
         <th scope="col">Crimes</th>
         <th scope="col">Status</th>
+        <th scope="col">Image</th>
         <th scope="col">Actions</th>
     </thead>
     {% for criminal in criminals %}
@@ -48,6 +49,10 @@
             {% if criminal.status==2 %}
             Released
             {% endif %}
+        </td>
+        <td>
+            <!-- <img src="{{ url_for('static', filename='uploads/profileimg.jpg') }}"/> -->
+            <img src="{{ criminal.image }}"/ style="width: 200px; height: 200px;">
         </td>
         <td class="row">
             <div class="btn-group">

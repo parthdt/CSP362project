@@ -18,11 +18,12 @@
 <h1>{{ button }} a criminal record.</h1><br>
 <div class="jumbotron">
     <div class="container">
-    <form method="POST" action="/{{ action }}">
+    <form method="POST" action="/{{ action }}" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         {{ wtf.form_field(form.name,class="custom1") }}
         {{ wtf.form_field(form.crimes,class="custom1") }}
         {{ wtf.form_field(form.status,class="custom1") }}
+        {{ wtf.form_field(form.image,class="custom1") }}
         <div class="alert">
             Status codes: 0 -> Arrested, 1 -> Wanted, 2 -> Released
         </div>
