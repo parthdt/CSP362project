@@ -18,7 +18,8 @@
         {{ wtf.form_field(form.username,class="custom1") }}
         {{ wtf.form_field(form.name,class="custom1") }}
         {{ wtf.form_field(form.password,class="custom1") }}
-        {{ wtf.form_field(form.email,class="custom1") }}<br>
+        {{ wtf.form_field(form.email,class="custom1") }}
+        {{ form.recaptcha }}<br>
         <button class="btn btn-secondary" type="submit">Signup</button>
     </form>
     </div>

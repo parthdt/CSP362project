@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, flash, url_for, request
 from flask_bootstrap import Bootstrap
-from flask_wtf import FlaskForm
+from flask_wtf import FlaskForm, RecaptchaField
 from flask_uploads import UploadSet, IMAGES
 from wtforms import StringField, PasswordField, BooleanField, DecimalField
 from wtforms.validators import InputRequired, Email, Length, NumberRange
@@ -17,6 +17,10 @@ images = UploadSet('images', IMAGES)
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dbms.db'
 app.config['SECRET_KEY'] = 'DBMSPROJECT'
+app.config['RECAPTCHA_USE_SSL']= False
+app.config['RECAPTCHA_OPTIONS']= {'theme':'black'}
+app.config['RECAPTCHA_PUBLIC_KEY']='6Lcd6wkaAAAAAHNbwgDk0XGX-hnO_EcOJYtPiLA3'
+app.config['RECAPTCHA_PRIVATE_KEY']='6Lcd6wkaAAAAAKBAW7jb_0YMe6r6E3bqAdPr7SNF'
 app.config['UPLOAD_FOLDER'] = UPLOADS_PATH
 
 Bootstrap(app)
@@ -61,6 +65,7 @@ class SignupForm(FlaskForm):
     username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
     password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
     email = StringField('email', validators=[InputRequired(), Email(message='Invalid Email'), Length(max=69)])
+    recaptcha = RecaptchaField()
 
 class AddCriminalForm(FlaskForm):
     name = StringField('name', validators=[InputRequired(), Length(min=10, max=50)])
