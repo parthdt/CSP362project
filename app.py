@@ -19,8 +19,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dbms.db'
 app.config['SECRET_KEY'] = 'DBMSPROJECT'
 app.config['RECAPTCHA_USE_SSL']= False
 app.config['RECAPTCHA_OPTIONS']= {'theme':'black'}
-app.config['RECAPTCHA_PUBLIC_KEY']='6Lcd6wkaAAAAAHNbwgDk0XGX-hnO_EcOJYtPiLA3'
-app.config['RECAPTCHA_PRIVATE_KEY']='6Lcd6wkaAAAAAKBAW7jb_0YMe6r6E3bqAdPr7SNF'
+app.config['RECAPTCHA_PUBLIC_KEY']=''
+app.config['RECAPTCHA_PRIVATE_KEY']=''
 app.config['UPLOAD_FOLDER'] = UPLOADS_PATH
 
 Bootstrap(app)
