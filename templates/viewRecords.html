@@ -23,6 +23,7 @@
     <thead>
         <th scope="col">ID</th>
         <th scope="col">Name</th>
+        <th scope="col">Gender</th>
         <th scope="col">Crimes</th>
         <th scope="col">Status</th>
         <th scope="col">Image</th>
@@ -37,10 +38,13 @@
             {{ criminal.name }}
         </td>
         <td>
+            {{ criminal.gender }}
+        </td>
+        <td>
             {{ criminal.crimes }}
         </td>
         <td>
-            {% if criminal.status==0 %}
+            <!-- {% if criminal.status==0 %}
             Arrested
             {% endif %}
             {% if criminal.status==1 %}
@@ -48,7 +52,8 @@
             {% endif %}
             {% if criminal.status==2 %}
             Released
-            {% endif %}
+            {% endif %} -->
+            {{ criminal.status }}
         </td>
         <td>
             <!-- <img src="{{ url_for('static', filename='uploads/profileimg.jpg') }}"/> -->
